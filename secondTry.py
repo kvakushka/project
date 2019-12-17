@@ -26,6 +26,8 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Прощай......я буду скучать')
     elif message.text.lower() == 'ты лох?':
         bot.send_message(message.chat.id, 'сам ты лох, дебил')
+    elif message.text.lower() == 'песенка': #просто проверочка
+        bot.send_audio(message.chat.id, 'CQADAgADSQUAAkn8yEunFhTlnfi6khYE')
     else:
         bot.send_sticker(message.chat.id, 'CAADAgADNAADkp8eEfIdTHZlMTXQFgQ')
 
