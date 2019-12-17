@@ -1,6 +1,5 @@
 import telebot
-import os
-import time
+
 
 bot = telebot.TeleBot('947227617:AAEBlhomRlRuqeTymeM-zVo9Pn6JmxwgVf4')
 keyboard = telebot.types.ReplyKeyboardMarkup()
