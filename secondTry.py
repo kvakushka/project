@@ -9,7 +9,14 @@ keyboard.row('Привет', 'Пока', 'ты лох?')
 def start_message(message):
     bot.send_message(message.chat.id, 'Привет, хочешь поговорить?', reply_markup=keyboard)
 
-
+@bot.message_handler(commands=['song']) #для выяснения file_id у песен
+def find_file_ids(message):
+    for file in os.listdir('/Users/elinaaptineeva/Desktop/music/'):
+        if file.split('.')[-1] == 'm4a':
+            songg = open('/Users/elinaaptineeva/Desktop/music/'+file, 'rb')
+            msg = bot.send_audio(message.chat.id, songg, None)
+            bot.send_message(message.chat.id, msg.audio.file_id, reply_to_message_id=msg.message_id)
+        time.sleep(1)
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
