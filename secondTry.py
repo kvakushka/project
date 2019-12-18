@@ -43,7 +43,13 @@ Gym_id = ['CQADAgADaAQAAuKn2Ev6bqsxt0Z9LhYE', 'CQADAgADaQQAAuKn2EvKeDre7P00wRYE'
           'CQADAgADeAQAAuKn2Etqv6ihz5LMXRYE', 'CQADAgADegQAAuKn2EtRt-NRDpb5XxYE', 'CQADAgADhgQAAl_02Ut1DFAy6WP96RYE',
           'CQADAgAD4AYAAkn80EusWEgzGgVX2xYE']
 
-Sad_id =[]
+Sad_id =['CQADAgADrAQAAuKn2EvTYXbGCJhA_xYE', 'CQADAgADBAcAAkn80Eu8SpLIeqpjVRYE', 'CQADAgADsQQAAuKn2EtPdwj4_rVMVRYE',
+         'CQADAgADBQcAAkn80Eu-KlWLkYBKQxYE', 'CQADAgADBwcAAkn80EvUDno6_qyRAxYE', 'CQADAgADtgQAAuKn2EtKyZd94LoUNBYE',
+         'CQADAgADCQcAAkn80Eu3xJ4naMt1KxYE', 'CQADAgADuQQAAuKn2EseihnnQzqJlhYE', 'CQADAgADDAcAAkn80EvZBEsNzI-E2BYE',
+         'CQADAgADvQQAAuKn2Esn6g1_-AzhpBYE', 'CQADAgADEAcAAkn80EvpdV9TvYllJhYE', 'CQADAgADEgcAAkn80EtjuwxR1GsjYBYE',
+         'CQADAgADEwcAAkn80EtsP4Xs3euWYBYE', 'CQADAgADvwQAAuKn2Evre264AUZrVBYE', 'CQADAgADFQcAAkn80EtLifRoZpPlqBYE',
+         'CQADAgADFgcAAkn80Es8hE7yupJumhYE', 'CQADAgADxAQAAuKn2EusuYR858FlOhYE', 'CQADAgADxQQAAuKn2Es9yEUAAbsZd3wWBA',
+         'CQADAgADxgQAAuKn2EtgsAY-Qk2NTBYE', 'CQADAgADkwQAAl_02UtMpXeZxbwPJhYE', 'CQADAgADFwcAAkn80EsnFRJnwFEHIBYE']
 
 Party_id = []
 
@@ -73,9 +79,9 @@ def start_message(message):
 
 @bot.message_handler(commands=['song'])
 def find_file_ids(message):
-    for file in os.listdir('/Users/elinaaptineeva/Desktop/gym/'):
+    for file in os.listdir('/Users/elinaaptineeva/Desktop/party/'):
         if file.split('.')[-1] == 'm4a' or 'mp3':
-            songg = open('/Users/elinaaptineeva/Desktop/gym/'+file, 'rb')
+            songg = open('/Users/elinaaptineeva/Desktop/party/'+file, 'rb')
             msg = bot.send_audio(message.chat.id, songg, None)
             bot.send_message(message.chat.id, msg.audio.file_id, reply_to_message_id=msg.message_id)
         time.sleep(30)
@@ -94,8 +100,8 @@ def send_text(message):
     elif message.text.lower() == 'по настроению':
         bot.send_message(message.chat.id, 'Какое у тебя настроение?', reply_markup=keyboard_mood)
     elif message.text.lower() == 'new year':
-        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1) #не нашли функцию, позволяющюю отправлять несколько аудио в одном сообщении,
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1) #поэтому приходится пять раз отправлять разные сообщения
         bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
@@ -107,6 +113,7 @@ def send_text(message):
         bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
+        bot.send_sticker(message.chat.id, 'CAADAgADBAADkp8eEavc7j2rScUkFgQ')
 
     elif message.text.lower() == 'gym':
         bot.send_audio(message.chat.id, random.choice(Gym_id), disable_notification=1)
@@ -117,19 +124,19 @@ def send_text(message):
         bot.send_sticker(message.chat.id, 'CAADAgADXgADaUCAC_ik5ou43wUkFgQ')
 
     elif message.text.lower() == 'sad':
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
+        bot.send_audio(message.chat.id, random.choice(Sad_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Sad_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Sad_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Sad_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Sad_id), disable_notification=1)
+        bot.send_sticker(message.chat.id, 'CAADAQADoBIAApl_iALzktRqOg9uhhYE')
 
     elif message.text.lower() == 'party':
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Party_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Party_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Party_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Party_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Party_id), disable_notification=1)
         bot.send_sticker(message.chat.id, '')
 
     elif message.text.lower() == 'nostalgia':
@@ -163,9 +170,9 @@ def send_text(message):
         bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
         bot.send_sticker(message.chat.id, '')
-        
+
         #Выбор для жанра
-        
+
     else:
         bot.send_sticker(message.chat.id, 'CAADAgADNAADkp8eEfIdTHZlMTXQFgQ')
 
