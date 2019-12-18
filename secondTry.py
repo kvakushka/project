@@ -1,20 +1,27 @@
 import telebot
 import os
 import time
+import random
 
 bot = telebot.TeleBot('947227617:AAEBlhomRlRuqeTymeM-zVo9Pn6JmxwgVf4')
 
-keyboard = telebot.types.ReplyKeyboardMarkup()
-keyboard.row('Привет', 'Пока', 'ты лох?', 'песенка', 'музыка')
+#keyboard = telebot.types.ReplyKeyboardMarkup()
+#keyboard.row('Привет', 'Пока', 'ты лох?', 'песенка', 'музыка')
 
-keyboard_choice = telebot.types.ReplyKeyboardMarkup()
-keyboard_choice.row('Christmas mood', 'In love', 'Gym', 'Sad', 'Party', 'Childhood', 'For studying', 'Поныть', 'Стихи',
-                    'Меланхолия')
+keyboard_mood = telebot.types.ReplyKeyboardMarkup()
+keyboard_mood.row('Christmas', 'In love', 'Gym', 'Sad')
+keyboard_mood.row('Party', 'Childhood', 'Studying')
+keyboard_mood.row('Поныть', 'Стихи', 'Меланхолия', 'Назад')
+
 keyboard_menu = telebot.types.ReplyKeyboardMarkup()
-keyboard_menu.row('По настроению', 'По жанрам', 'По дате рождения', 'Топ песен', 'Для сна', 'Акустика')
+keyboard_menu.row('По настроению', 'По жанрам')
+keyboard_menu.row('По дате рождения', 'Топ песен')
+keyboard_menu.row('Для сна', 'Акустика')
 
 keyboard_genre = telebot.types.ReplyKeyboardMarkup()
-keyboard_genre.row('Поп', 'Алтернатива', 'Рок', 'R&B', 'Электроника', 'Инди', 'Блюз-рок')
+keyboard_genre.row('Pop', 'Альтернатива')
+keyboard_genre.row('Рок', 'R&B', 'Электроника')
+keyboard_genre.row('Инди', 'Блюз-рок')
 
 Christmas_id = ['CQADAgADfgUAAkn8yEuQTb7jsefMwRYE', 'CQADAgADuQMAAlB-0Esk5DfJL3PL3xYE', 'CQADAgADugMAAlB-0EsKKBL745odthYE',
              'CQADAgADiAUAAlHpyEtHo19BOckZBhYE', 'CQADAgADigUAAlHpyEsncQwqd_wN-hYE', 'CQADAgADEgUAAuKn0Evq-j1RUa4aERYE',
@@ -29,9 +36,10 @@ InLove_id = ['CQADAgADJgQAAlB-0Es96dEgDKGQghYE', 'CQADAgADGQYAAkn80EvnNZ9FNewtwx
           'CQADAgADJwUAAuKn0EuH_xVjSLMGERYE', 'CQADAgADLwYAAkn80EtQPbwwElckAAEWBA', 'CQADAgADKQQAAlB-0Etro6O-CxIXqhYE']
 
 # Сделать листы для остальных песен
+
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'Привет, хочешь поговорить?', reply_markup=keyboard)
+    bot.send_message(message.chat.id, 'Привет, как ты хочешь осуществить выбор музыки?', reply_markup=keyboard_menu)
 
 
 @bot.message_handler(commands=['song'])
@@ -40,10 +48,8 @@ def find_file_ids(message):
         if file.split('.')[-1] == 'm4a' or 'mp3':
             songg = open('/Users/elinaaptineeva/Desktop/music_bot/in.love/'+file, 'rb')
             msg = bot.send_audio(message.chat.id, songg, None)
-            # А теперь отправим вслед за файлом его file_id
             bot.send_message(message.chat.id, msg.audio.file_id, reply_to_message_id=msg.message_id)
-        time.sleep(20)  #найти оптимальное время
-
+        time.sleep(20)
 
 
 @bot.message_handler(content_types=['text'])
@@ -52,14 +58,22 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Приветос')
     elif message.text.lower() == 'пока':
         bot.send_message(message.chat.id, 'Прощай......я буду скучать')
-    elif message.text.lower() == 'ты лох?':
-        bot.send_message(message.chat.id, 'сам ты лох, дебил')
-    elif message.text.lower() == 'песенка':
-        bot.send_audio(message.chat.id, 'CQADAgADSQUAAkn8yEunFhTlnfi6khYE')
-    elif message.text.lower() == 'музыка':
-        bot.send_message(message.chat.id, 'Какое у тебя сейчас настроение?', reply_markup=keyboard_choice) #нужно найти инфу о нормальном расположении прямоугольничков
+    elif message.text.lower() == 'по настроению':
+        bot.send_message(message.chat.id, 'Какое у тебя настроение?', reply_markup=keyboard_mood)
+    elif message.text.lower() == 'christmas':
+        bot.send_audio(message.chat.id, random.choice(Christmas_id)) 
     else:
         bot.send_sticker(message.chat.id, 'CAADAgADNAADkp8eEfIdTHZlMTXQFgQ')
+
+
+#@bot.message_handler(func=lambda message: True, content_types=['text'])
+#def send_song_mood(message):
+#    if message.text.lower() == 'по настроению':
+#        bot.send_message(message.chat.id, 'Какое у тебя настроение?', reply_markup=keyboard_mood)
+#        if message.text.lower() == 'Christmas mood':
+#          bot.send_audio(message.chat.id, 'CQADAgADfgUAAkn8yEuQTb7jsefMwRYE')
+
+
 
 
 
