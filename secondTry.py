@@ -9,9 +9,9 @@ bot = telebot.TeleBot('947227617:AAEBlhomRlRuqeTymeM-zVo9Pn6JmxwgVf4')
 #keyboard.row('Привет', 'Пока', 'ты лох?', 'песенка', 'музыка')
 
 keyboard_mood = telebot.types.ReplyKeyboardMarkup()
-keyboard_mood.row('Christmas', 'In love', 'Gym', 'Sad')
+keyboard_mood.row('New Year', 'In love', 'Gym', 'Sad')
 keyboard_mood.row('Party', 'Childhood', 'Studying')
-keyboard_mood.row('Поныть', 'Стихи', 'Меланхолия', 'Назад')
+keyboard_mood.row('Poetry', 'Melancholy', 'Назад')
 
 keyboard_menu = telebot.types.ReplyKeyboardMarkup()
 keyboard_menu.row('По настроению', 'По жанрам')
@@ -21,9 +21,9 @@ keyboard_menu.row('Для сна', 'Акустика')
 keyboard_genre = telebot.types.ReplyKeyboardMarkup()
 keyboard_genre.row('Pop', 'Альтернатива')
 keyboard_genre.row('Рок', 'R&B', 'Электроника')
-keyboard_genre.row('Инди', 'Блюз-рок')
+keyboard_genre.row('Инди', 'Блюз-рок', 'Назад')
 
-Christmas_id = ['CQADAgADfgUAAkn8yEuQTb7jsefMwRYE', 'CQADAgADuQMAAlB-0Esk5DfJL3PL3xYE', 'CQADAgADugMAAlB-0EsKKBL745odthYE',
+NewYear_id = ['CQADAgADfgUAAkn8yEuQTb7jsefMwRYE', 'CQADAgADuQMAAlB-0Esk5DfJL3PL3xYE', 'CQADAgADugMAAlB-0EsKKBL745odthYE',
              'CQADAgADiAUAAlHpyEtHo19BOckZBhYE', 'CQADAgADigUAAlHpyEsncQwqd_wN-hYE', 'CQADAgADEgUAAuKn0Evq-j1RUa4aERYE',
              'CQADAgADDgYAAkn80EtWBclWfG6KhhYE', 'CQADAgADDwYAAkn80Evvwca7YbFaoBYE', 'CQADAgADEAYAAkn80Euh1lFcu-MJNBYE']
 
@@ -36,6 +36,13 @@ InLove_id = ['CQADAgADJgQAAlB-0Es96dEgDKGQghYE', 'CQADAgADGQYAAkn80EvnNZ9FNewtwx
           'CQADAgADJwUAAuKn0EuH_xVjSLMGERYE', 'CQADAgADLwYAAkn80EtQPbwwElckAAEWBA', 'CQADAgADKQQAAlB-0Etro6O-CxIXqhYE']
 
 # Сделать листы для остальных песен
+
+#new_list = random.sample(Christmas_id, k=5)
+#def random_songs():
+    #for i in range(len(new_list)):     В таком случае в ответе бота будут new_list[0] и тд
+        #return new_list[i]
+
+
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -58,20 +65,25 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Приветос')
     elif message.text.lower() == 'пока':
         bot.send_message(message.chat.id, 'Прощай......я буду скучать')
+    elif message.text.lower() == 'назад':
+        bot.send_message(message.chat.id, 'Как ты хочешь осуществить выбор музыки?', reply_markup=keyboard_menu)
     elif message.text.lower() == 'по настроению':
         bot.send_message(message.chat.id, 'Какое у тебя настроение?', reply_markup=keyboard_mood)
-    elif message.text.lower() == 'christmas':
-        bot.send_audio(message.chat.id, random.choice(Christmas_id)) 
+    elif message.text.lower() == 'new year':
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(NewYear_id), disable_notification=1)
+    elif message.text.lower() == 'in love':
+        bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(InLove_id), disable_notification=1)
     else:
         bot.send_sticker(message.chat.id, 'CAADAgADNAADkp8eEfIdTHZlMTXQFgQ')
 
-
-#@bot.message_handler(func=lambda message: True, content_types=['text'])
-#def send_song_mood(message):
-#    if message.text.lower() == 'по настроению':
-#        bot.send_message(message.chat.id, 'Какое у тебя настроение?', reply_markup=keyboard_mood)
-#        if message.text.lower() == 'Christmas mood':
-#          bot.send_audio(message.chat.id, 'CQADAgADfgUAAkn8yEuQTb7jsefMwRYE')
 
 
 
