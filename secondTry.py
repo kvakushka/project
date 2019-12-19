@@ -2,8 +2,46 @@ import telebot
 import os
 import time
 import random
+import openpyxl
+
 
 bot = telebot.TeleBot('947227617:AAEBlhomRlRuqeTymeM-zVo9Pn6JmxwgVf4')
+
+workbook = openpyxl.load_workbook(filename="/Users/elinaaptineeva/Desktop/Music.xlsx")
+ny_sheet = workbook["NewYear_id"]
+love_sheet = workbook["InLove_id"]
+gym_sheet = workbook["Gym_id"]
+sad_sheet = workbook["Sad_id"]
+party_sheet = workbook["Party_id"]
+nostalgia_sheet = workbook["Nostalgia_id"]
+studying_sheet = workbook["Studying_id"]
+pop_sheet = workbook["Pop_id"]
+alternative_sheet = workbook["Alternative_id"]
+rock_sheet = workbook["Rock_id"]
+randb_sheet = workbook["RandB_id"]
+electro_sheet = workbook["Electro_id"]
+sleep_sheet = workbook["ForSleep_id"]
+acoustics_sheet = workbook["Acoustics_id"]
+
+ny_list = [ny_sheet.cell(row=i,column=1).value for i in range(1,13)]
+love_list = [love_sheet.cell(row=i,column=1).value for i in range(1,21)]
+gym_list = [gym_sheet.cell(row=i,column=1).value for i in range(1,21)]
+sad_list = [sad_sheet.cell(row=i,column=1).value for i in range(1,21)]
+party_list = [party_sheet.cell(row=i,column=1).value for i in range(1,21)]
+nostalgia_list = [nostalgia_sheet.cell(row=i,column=1).value for i in range(1,21)]
+studying_list = [studying_sheet.cell(row=i,column=1).value for i in range(1,21)]
+pop_list = [pop_sheet.cell(row=i,column=1).value for i in range(1,21)]
+alternative_list = [alternative_sheet.cell(row=i,column=1).value for i in range(1,21)]
+rock_list = [rock_sheet.cell(row=i,column=1).value for i in range(1,21)]
+randb_list = [randb_sheet.cell(row=i,column=1).value for i in range(1,21)]
+electro_list = [electro_sheet.cell(row=i,column=1).value for i in range(1,21)]
+sleep_list = [sleep_sheet.cell(row=i,column=1).value for i in range(1,21)]
+acoustics_list = [acoustics_sheet.cell(row=i,column=1).value for i in range(1,21)]
+#birthday_list = рандом из всех листов
+#top просто 5 наших песен
+
+
+
 
 #keyboard = telebot.types.ReplyKeyboardMarkup()
 #keyboard.row('Привет', 'Пока', 'ты лох?', 'песенка', 'музыка')
@@ -188,8 +226,6 @@ def send_text(message):
         #bot.send_sticker(message.chat.id, '')
 
     elif message.text.lower() == 'studying':
-        bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
-        bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
