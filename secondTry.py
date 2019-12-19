@@ -77,7 +77,6 @@ def start_message(message):
 #        time.sleep(30)
 
 
-print(acoustics_list)
 @bot.message_handler(func=lambda message: True, content_types=['text']) #Все в одной функции, так как все сообщения имеют один тип text
 def send_text(message):
     if message.text.lower() == 'привет':
