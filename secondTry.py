@@ -66,15 +66,15 @@ keyboard_season.row('Назад')
 def start_message(message):
     bot.send_message(message.chat.id, 'Привет, как ты хочешь осуществить выбор музыки?', reply_markup=keyboard_menu)
 
-
-@bot.message_handler(commands=['song']) #команда для добавления новой песни(измените путь на свой, чтобы добавить)
-def find_file_ids(message):
-    for file in os.listdir('/Users/elinaaptineeva/Desktop/top/'):
-        if file.split('.')[-1] == 'm4a' or 'mp3':
-            songg = open('/Users/elinaaptineeva/Desktop/top/'+file, 'rb')
-            msg = bot.send_audio(message.chat.id, songg, None)
-            bot.send_message(message.chat.id, msg.audio.file_id, reply_to_message_id=msg.message_id)
-        time.sleep(30)
+#Функция, позволяющая узнать file_id аудио файлов, при работа самого бота больше не нужна
+#@bot.message_handler(commands=['song']) #команда для добавления новой песни(измените путь на свой, чтобы добавить)
+#def find_file_ids(message):
+#    for file in os.listdir('/Users/elinaaptineeva/Desktop/top/'):
+#        if file.split('.')[-1] == 'm4a' or 'mp3':
+#            songg = open('/Users/elinaaptineeva/Desktop/top/'+file, 'rb')
+#            msg = bot.send_audio(message.chat.id, songg, None)
+#            bot.send_message(message.chat.id, msg.audio.file_id, reply_to_message_id=msg.message_id)
+#        time.sleep(30)
 
 
 print(acoustics_list)
