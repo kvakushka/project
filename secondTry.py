@@ -21,7 +21,7 @@ keyboard_menu.row('Для сна', 'Акустика')
 keyboard_genre = telebot.types.ReplyKeyboardMarkup()
 keyboard_genre.row('Pop', 'Альтернатива')
 keyboard_genre.row('Рок', 'R&B', 'Электроника')
-keyboard_genre.row('Инди', 'Блюз-рок', 'Назад')
+keyboard_genre.row('Назад')
 
 #Списки file_id аудио для настроения
 
@@ -73,18 +73,37 @@ Studying_id =['CQADAgADSAcAAkn80Evzdad4kE0p0hYE', 'CQADAgADSQcAAkn80Eu7RP4eGL6DX
 
 #Списки file_id аудио для жанров
 
-Pop_id = []
+Pop_id = ['CQADAgADVwcAAkn80EvnSJwmIolkghYE', 'CQADAgADWAcAAkn80EttsuWE73G6NxYE', 'CQADAgADWQcAAkn80Esaw8VDCNgQuBYE',
+          'CQADAgAD5gQAAuKn2Es0_syZYRE_nRYE', 'CQADAgADWwcAAkn80EsEDFAbSm432xYE', 'CQADAgAD5wQAAuKn2EsCiw3vA-br0RYE',
+          'CQADAgAD6AQAAuKn2Et3aVL--o7eqRYE', 'CQADAgADXQcAAkn80EtrdD_P_X274BYE', 'CQADAgADXgcAAkn80EvVM-VTHwgvQRYE',
+          'CQADAgADXwcAAkn80Et2aXZMBintnBYE', 'CQADAgAD-gQAArqK2EsNeOWky-VmtxYE', 'CQADAgADYAcAAkn80EvpWKwyAgmOmRYE',
+          'CQADAgADGAQAAuGH2EsJ9eW7Crr_UxYE', 'CQADAgADGQQAAuGH2EuRvX4Q7rec5BYE', 'CQADAgAD2AQAAl_02UuGfuUoqvNvtRYE',
+          'CQADAgADGgQAAuGH2EtX58BlyBudpBYE']
 
-Alternative_id = []
+Alternative_id = ['CQADAgADYwUAAuKn2Es-MiWHIwqmoBYE', 'CQADAgADGwUAAl_02Uth9nw0AW9qRxYE', 'CQADAgADRAQAAuGH2EuTp8kCersoqhYE',
+                  'CQADAgADHgUAAl_02Uvuhw2XbVCuTBYE', 'CQADAgADRQQAAuGH2Eu4kys_Qe-vCBYE', 'CQADAgADRwQAAuGH2Et7FZgboBB5thYE',
+                  'CQADAgADJQUAAl_02UvS-KPf-Knk1RYE', 'CQADAgADbgUAAuKn2EtEfsYkEOI2ThYE', 'CQADAgADTAQAAuGH2EuZTcx_EWMmFxYE',
+                  'CQADAgADJwUAAl_02Ut9RxprO7VnaBYE', 'CQADAgADcAUAAuKn2Et1P683h7JkMRYE', 'CQADAgADTQQAAuGH2EtK09FwHW6I_hYE',
+                  'CQADAgADTgQAAuGH2Eslw0CAW_QtsRYE']
 
-Rock_id = []
+Rock_id = ['CQADAgADUAQAAuGH2EvCd-q2s53z0xYE', 'CQADAgADcQUAAuKn2EuDmsUGmwNWORYE', 'CQADAgADKQUAAl_02UvI8AzTtv77wxYE',
+           'CQADAgADdAUAAuKn2EvYjMpLAAGOW0oWBA', 'CQADAgADdQUAAuKn2EtQmLMnJvxp1hYE', 'CQADAgADUgQAAuGH2Eu1L6wm_pIrxRYE',
+           'CQADAgADdwUAAuKn2EvY4IKsT0miKhYE', 'CQADAgADUwQAAuGH2EvOPGQ1cZODsBYE', 'CQADAgADeAUAAuKn2Et9FDj56wKmgBYE',
+           'CQADAgADeQUAAuKn2EtPZDLO5syW7RYE', 'CQADAgADLwUAAl_02UsoJAkbMq-sqxYE', 'CQADAgADVQQAAuGH2Esd9sl00tq2vRYE',
+           'CQADAgADfAUAAuKn2Eu3ff_BTfirRBYE', 'CQADAgADVgQAAuGH2Evr6_fyJ7mwHBYE', 'CQADAgADVwQAAuGH2EvfOYyySbbC7hYE',
+           'CQADAgADfgUAAuKn2EuypwpO5ZGzxxYE', 'CQADAgADgAUAAuKn2Es-_Mh10DmlIRYE','CQADAgADWAQAAuGH2EvU4l208Pv_LBYE']
 
 RandB_id = []
 
 Electro_id = []
 
-Indi_id = []
+#Списки file_id аудио для сна
 
+ForSleep_id = []
+
+#Списки file_id для акустики
+
+Acoustics_id = []
 
 #new_list = random.sample(Christmas_id, k=5)
 #def random_songs():
@@ -99,9 +118,9 @@ def start_message(message):
 
 @bot.message_handler(commands=['song'])
 def find_file_ids(message):
-    for file in os.listdir('/Users/elinaaptineeva/Desktop/studying/'):
+    for file in os.listdir('/Users/elinaaptineeva/Desktop/rock/'):
         if file.split('.')[-1] == 'm4a' or 'mp3':
-            songg = open('/Users/elinaaptineeva/Desktop/studying/'+file, 'rb')
+            songg = open('/Users/elinaaptineeva/Desktop/rock/'+file, 'rb')
             msg = bot.send_audio(message.chat.id, songg, None)
             bot.send_message(message.chat.id, msg.audio.file_id, reply_to_message_id=msg.message_id)
         time.sleep(50)
@@ -174,7 +193,7 @@ def send_text(message):
         bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
         bot.send_audio(message.chat.id, random.choice(Studying_id), disable_notification=1)
-        #bot.send_sticker(message.chat.id, '')
+        bot.send_sticker(message.chat.id, 'CAADAgADFAkAAlwCZQOykwORp3AchRYE')
 
     elif message.text.lower() == 'poetry':
         bot.send_audio(message.chat.id, 'CQADAgADLQcAAkn80Evi9KmmqvCqIhYE', disable_notification=1)
@@ -188,60 +207,45 @@ def send_text(message):
     elif message.text.lower() == 'по жанрам':
         bot.send_message(message.chat.id, 'Какой ты хочешь жанр?', reply_markup=keyboard_genre)
     elif message.text.lower() == 'pop':
-        bot.send_message(message.chat.id, random.choice(Pop_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Pop_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Pop_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Pop_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Pop_id), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
+        bot.send_audio(message.chat.id, random.choice(Pop_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Pop_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Pop_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Pop_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Pop_id), disable_notification=1)
+        #bot.send_sticker(message.chat.id, '')
 
     elif message.text.lower() == 'альтернатива':
-        bot.send_message(message.chat.id, random.choice(Alternative_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Alternative_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Alternative_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Alternative_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Alternative_id), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
+        bot.send_audio(message.chat.id, random.choice(Alternative_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Alternative_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Alternative_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Alternative_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Alternative_id), disable_notification=1)
+        #bot.send_sticker(message.chat.id, '')
 
     elif message.text.lower() == 'рок':
-        bot.send_message(message.chat.id, random.choice(Rock_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Rock_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Rock_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Rock_id), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(Rock_id), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
+        bot.send_audio(message.chat.id, random.choice(Rock_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Rock_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Rock_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Rock_id), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(Rock_id), disable_notification=1)
+        #bot.send_sticker(message.chat.id, '')
 
     elif message.text.lower() == 'r&b':
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        #bot.send_sticker(message.chat.id, '')
 
     elif message.text.lower() == 'электроника':
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        bot.send_audio(message.chat.id, random.choice(), disable_notification=1)
+        #bot.send_sticker(message.chat.id, '')
 
-    elif message.text.lower() == 'инди':
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
-
-    elif message.text.lower() == 'блюз-рок':
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_message(message.chat.id, random.choice(), disable_notification=1)
-        bot.send_sticker(message.chat.id, '')
 
 
 
