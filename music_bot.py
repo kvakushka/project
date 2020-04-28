@@ -7,7 +7,7 @@ import openpyxl
 
 bot = telebot.TeleBot('947227617:AAEBlhomRlRuqeTymeM-zVo9Pn6JmxwgVf4')
 
-workbook = openpyxl.load_workbook(filename="/Users/elinaaptineeva/Desktop/Music.xlsx")
+workbook = openpyxl.load_workbook(filename="Music.xlsx")
 
 #Ссылки на листы из Excel
 ny_sheet = workbook["NewYear_id"]
